@@ -7,7 +7,7 @@ public class ContactData {
   private final String address;
   private final String mobile;
   private final String email;
-  private String group;
+  public static String group;
 
   public ContactData(String firstname, String lastname, String nickname, String address, String mobile, String email, String group) {
     this.firstname = firstname;
@@ -43,7 +43,7 @@ public class ContactData {
     return email;
   }
 
-  public String getGroup() {
+  public static String getGroup() {
     return group;
   }
 }
