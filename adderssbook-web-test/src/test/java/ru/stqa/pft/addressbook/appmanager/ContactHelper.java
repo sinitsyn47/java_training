@@ -26,10 +26,10 @@ public class ContactHelper extends HelperBase {
 
 
     if (creation) {
-      if (! wd.findElement(By.name("new_group")).equals(ContactData.getGroup())) {
-        new Select(wd.findElement(By.name("new_group"))). selectByValue("[none]");
-      } else if (wd.findElement(By.name("new_group")).equals(ContactData.getGroup())) {
-        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(ContactData.getGroup());
+      if (wd.findElement(By.name("new_group")).equals(ContactData.getGroup())) {
+        new Select(wd.findElement(By.name("new_group"))). selectByVisibleText(ContactData.getGroup());
+      } else if (! wd.findElement(By.name("new_group")).equals(ContactData.getGroup())) {
+        new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(null);
       }
       else Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
