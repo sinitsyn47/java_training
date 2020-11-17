@@ -30,12 +30,11 @@ public class ContactHelper extends HelperBase {
 
 
     if (creation) {
-      if (! wd.findElement(By.name("new_group")).equals(ContactData.getGroup())) {
-        new Select(wd.findElement(By.name("new_group"))). selectByValue("[none]");
+      if (!wd.findElement(By.name("new_group")).equals(ContactData.getGroup())) {
+        new Select(wd.findElement(By.name("new_group"))).selectByValue("[none]");
       } else if (wd.findElement(By.name("new_group")).equals(ContactData.getGroup())) {
         new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(ContactData.getGroup());
-      }
-      else Assert.assertFalse(isElementPresent(By.name("new_group")));
+      } else Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
 
@@ -78,14 +77,17 @@ public class ContactHelper extends HelperBase {
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
     WebElement tbl = wd.findElement(By.xpath("//*[@id=\"maintable\"]/tbody"));
-    List<WebElement> elements = tbl.findElements(By.tagName("td"));
-    for ( int i = 0; i < elements.size(); i = i +10) {
-        int id = Integer.parseInt(elements.get(i).findElement(By.tagName("input")).getAttribute("value"));
-        String lastname = elements.get(i + 1).getText();
-        String firstname = elements.get(i + 2).getText();
+    List<WebElement> elements = tbl.findElements(By.name("entry"));
+    for (WebElement element : elements) {
+      List<WebElement> cells = element.findElements(By.tagName("td"));
+      for (int i = 0; i < cells.size(); i= + 10) {
+        int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
+        String lastname = cells.get(1).getText();
+        String firstname = cells.get(2).getText();
         ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null, null);
         contacts.add(contact);
       }
+    }
     return contacts;
   }
 }
