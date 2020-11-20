@@ -80,7 +80,7 @@ public class GroupHelper extends HelperBase {
   public int getGroupCount() {
     return wd.findElements(By.name("selected[]")).size();
   }
-  
+
 
   public Set<GroupData> all() {
     Set<GroupData> groups = new HashSet<GroupData>();

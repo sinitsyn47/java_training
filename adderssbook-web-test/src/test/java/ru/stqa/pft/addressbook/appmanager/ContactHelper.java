@@ -8,7 +8,9 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -48,12 +50,14 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void selectContact(int index) {
-    wd.findElements(By.name("selected[]")).get(index).click();
+
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
   }
 
-  public void initContactModification(int index) {
-    wd.findElements(By.cssSelector("img[alt=\"Edit\"]")).get(index).click();
+
+  public void initContactModificationById(int id) {
+    wd.findElement(By.cssSelector("a[href='edit.php?id=" + id + "']")).click();
   }
 
   public void submitContactModification() {
@@ -66,15 +70,16 @@ public class ContactHelper extends HelperBase {
     submitContactCreation();
   }
 
-  public void modify(int index, ContactData contact) {
-    selectContact(index);
-    initContactModification(index);
+  public void modify(ContactData contact) {
+    selectContactById(contact.getId());
+    initContactModificationById(contact.getId());
     fillContactForm(contact, false);
     submitContactModification();
   }
 
-  public void delete(int index) {
-    selectContact(index);
+
+  public void delete(ContactData contact) {
+    selectContactById(contact.getId());
     deletedContact();
   }
 
@@ -86,8 +91,8 @@ public class ContactHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<ContactData> list() {
-    List<ContactData> contacts = new ArrayList<ContactData>();
+  public Set<ContactData> all() {
+    Set<ContactData> contacts = new HashSet<ContactData>();
     WebElement tbl = wd.findElement(By.xpath("//*[@id=\"maintable\"]/tbody"));
     List<WebElement> elements = tbl.findElements(By.name("entry"));
     for (WebElement element : elements) {
@@ -99,5 +104,6 @@ public class ContactHelper extends HelperBase {
     }
     return contacts;
   }
+
 }
 
