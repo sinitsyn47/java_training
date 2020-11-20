@@ -19,7 +19,15 @@ public class ContactPhoneTest extends TestBase {
     ContactData contactInfoFormEdit = app.contact().infoFormEditForm(contact);
 
     assertThat(contact.getAllPhones(), equalTo(mergePhones(contactInfoFormEdit)));
+    assertThat(contact.getAddress(), equalTo(contactInfoFormEdit.getAddress()));
+    assertThat(contact.getAllEmail(), equalTo(mergeEmail(contactInfoFormEdit)));
 
+  }
+
+  private String mergeEmail(ContactData contact) {
+    return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
+            .stream().filter((s) -> ! s.equals(""))
+            .collect(Collectors.joining("\n"));
   }
 
   private String mergePhones(ContactData contact) {
