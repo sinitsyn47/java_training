@@ -20,7 +20,7 @@ public class ContactCreationTest extends TestBase {
     app.contact().initContactCreation();
     ContactData contact = new ContactData()
             .withFirstname("Sergey1").withLastname("Sinitsyn").withNickname("sergey")
-            .withAddress("Saint-P.").withMobile("+79533469988").withEmail("test@mail.ru").withGroup("test1");
+            .withAddress("Saint-P.").withHomePhone("5555").withMobilePhone("+79533469988").withWorkPhone("111").withEmail("test@mail.ru").withGroup("test1");
     app.contact().create(contact);
     app.goTo().goToHome();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
