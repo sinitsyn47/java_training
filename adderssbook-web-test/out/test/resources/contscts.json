@@ -1,0 +1,67 @@
+[
+  {
+    "firstname": "Sergey 0",
+    "lastname": "Sinitsyn 0",
+    "nickname": "sergey 0",
+    "address": "Saint.P 0",
+    "home": "222330",
+    "mobile": "+79533469980",
+    "work": "111-110",
+    "email": "test_0@mail.ru",
+    "email2": "test2_0@mail.ru",
+    "email3": "test3_0@mail.ru",
+    "photo": {}
+  },
+  {
+    "firstname": "Sergey 1",
+    "lastname": "Sinitsyn 1",
+    "nickname": "sergey 1",
+    "address": "Saint.P 1",
+    "home": "222331",
+    "mobile": "+79533469981",
+    "work": "111-111",
+    "email": "test_1@mail.ru",
+    "email2": "test2_1@mail.ru",
+    "email3": "test3_1@mail.ru",
+    "photo": {}
+  },
+  {
+    "firstname": "Sergey 2",
+    "lastname": "Sinitsyn 2",
+    "nickname": "sergey 2",
+    "address": "Saint.P 2",
+    "home": "222332",
+    "mobile": "+79533469982",
+    "work": "111-112",
+    "email": "test_2@mail.ru",
+    "email2": "test2_2@mail.ru",
+    "email3": "test3_2@mail.ru",
+    "photo": {}
+  },
+  {
+    "firstname": "Sergey 3",
+    "lastname": "Sinitsyn 3",
+    "nickname": "sergey 3",
+    "address": "Saint.P 3",
+    "home": "222333",
+    "mobile": "+79533469983",
+    "work": "111-113",
+    "email": "test_3@mail.ru",
+    "email2": "test2_3@mail.ru",
+    "email3": "test3_3@mail.ru",
+    "photo": {}
+  },
+  {
+    "firstname": "Sergey 4",
+    "lastname": "Sinitsyn 4",
+    "nickname": "sergey 4",
+    "address": "Saint.P 4",
+    "home": "222334",
+    "mobile": "+79533469984",
+    "work": "111-114",
+    "email": "test_4@mail.ru",
+    "email2": "test2_4@mail.ru",
+    "email3": "test3_4@mail.ru",
+    "photo": {}
+  }
+]
