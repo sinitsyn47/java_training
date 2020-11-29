@@ -35,7 +35,6 @@ public class ContactData {
   public static String group;
   private String allPhones;
   private String allEmail;
-  @Expose
   private File photo;
 
 

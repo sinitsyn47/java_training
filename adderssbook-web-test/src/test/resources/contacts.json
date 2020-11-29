@@ -9,8 +9,7 @@
     "work": "111-110",
     "email": "test_0@mail.ru",
     "email2": "test2_0@mail.ru",
-    "email3": "test3_0@mail.ru",
-    "photo": {}
+    "email3": "test3_0@mail.ru"
   },
   {
     "firstname": "Sergey 1",
@@ -22,8 +21,7 @@
     "work": "111-111",
     "email": "test_1@mail.ru",
     "email2": "test2_1@mail.ru",
-    "email3": "test3_1@mail.ru",
-    "photo": {}
+    "email3": "test3_1@mail.ru"
   },
   {
     "firstname": "Sergey 2",
@@ -35,8 +33,7 @@
     "work": "111-112",
     "email": "test_2@mail.ru",
     "email2": "test2_2@mail.ru",
-    "email3": "test3_2@mail.ru",
-    "photo": {}
+    "email3": "test3_2@mail.ru"
   },
   {
     "firstname": "Sergey 3",
@@ -48,8 +45,7 @@
     "work": "111-113",
     "email": "test_3@mail.ru",
     "email2": "test2_3@mail.ru",
-    "email3": "test3_3@mail.ru",
-    "photo": {}
+    "email3": "test3_3@mail.ru"
   },
   {
     "firstname": "Sergey 4",
@@ -61,7 +57,6 @@
     "work": "111-114",
     "email": "test_4@mail.ru",
     "email2": "test2_4@mail.ru",
-    "email3": "test3_4@mail.ru",
-    "photo": {}
+    "email3": "test3_4@mail.ru"
   }
 ]
