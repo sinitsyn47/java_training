@@ -19,7 +19,7 @@ public class ContactPhoneTest extends TestBase {
       app.contact().create(new ContactData()
               .withFirstname("Sergey").withLastname("Sinitsyn").withNickname("sergey")
               .withAddress("Saint-P.").withHomePhone("255-55-99").withMobilePhone("+7(953)3469988").withWorkPhone("8(812)999-55-33")
-              .withEmail("test@mail.ru").withEmail2("work@test.ru").withEmail3("123_test.qwert@gmail.com").withGroup("test1"));
+              .withEmail("test@mail.ru").withEmail2("work@test.ru").withEmail3("123_test.qwert@gmail.com"));
     }
     app.goTo().goToHome();
   }

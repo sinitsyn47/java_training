@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import org.testng.annotations.*;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.Groups;
 
 
 import java.io.BufferedReader;
@@ -39,11 +40,12 @@ public class ContactCreationTest extends TestBase {
 
   @Test(dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) {
+    Groups groups = app.db().groups();
     File photo = new File("src/test/resources/cheetah.png");
     app.goTo().toHome();
     Contacts before = app.db().contacts();
     app.contact().initContactCreation();
-    app.contact().create(contact.withPhoto(photo).withGroup("test 1"));
+    app.contact().create(contact.withPhoto(photo).inGroup(groups.iterator().next()));
     app.goTo().goToHome();
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.db().contacts();
