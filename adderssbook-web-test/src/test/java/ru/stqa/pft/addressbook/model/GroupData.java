@@ -15,16 +15,7 @@ import java.util.Set;
 @Table (name = "group_list")
 public class GroupData {
 
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    GroupData groupData = (GroupData) o;
-    return id == groupData.id &&
-            Objects.equals(name, groupData.name) &&
-            Objects.equals(header, groupData.header) &&
-            Objects.equals(footer, groupData.footer);
-  }
+
 
   @Override
   public int hashCode() {
@@ -50,10 +41,12 @@ public class GroupData {
   @Type(type = "text")
   private String footer;
 
-  @ManyToMany(mappedBy = "groups")
+
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "group_id"), inverseJoinColumns = @JoinColumn(name="id"))
   private Set<ContactData> contacts = new HashSet<ContactData>();
 
-  public Set<ContactData> getContacts() {
+  public Contacts getContacts() {
     return new Contacts(contacts);
   }
 
@@ -99,6 +92,17 @@ public class GroupData {
             "id='" + id + '\'' +
             ", name='" + name + '\'' +
             '}';
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+    GroupData groupData = (GroupData) o;
+    return id == groupData.id &&
+            Objects.equals(name, groupData.name) &&
+            Objects.equals(header, groupData.header) &&
+            Objects.equals(footer, groupData.footer);
   }
 
 }

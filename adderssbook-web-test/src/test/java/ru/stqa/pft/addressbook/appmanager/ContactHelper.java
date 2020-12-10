@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
+import ru.stqa.pft.addressbook.model.GroupData;
 
 
 import java.util.List;
@@ -70,6 +71,27 @@ public class ContactHelper extends HelperBase {
     click(By.xpath("//div[@id='content']/form/input[22]"));
   }
 
+  public void selectAddGroup (){
+    wd.findElement(By.name("add")).click();
+  }
+
+  public void toGroup (String groups) {
+      new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(groups);
+  }
+
+  public void selectGroup(String groups){
+      new Select(wd.findElement(By.name("group"))).selectByVisibleText(groups);
+  }
+
+  public void selectAllGroup(){
+    new Select(wd.findElement(By.name("group"))).selectByVisibleText("[all]");
+  }
+
+  public void selectRemove(){
+    wd.findElement(By.name("remove")).click();
+  }
+
+
   public void create(ContactData contact) {
     initContactCreation();
     fillContactForm(contact, true);
@@ -89,6 +111,20 @@ public class ContactHelper extends HelperBase {
   public void delete(ContactData contact) {
     selectContactById(contact.getId());
     deletedContact();
+    contactCache = null;
+  }
+
+  public void addToGroup(ContactData contact, GroupData group){
+    selectContactById(contact.getId());
+    toGroup(group.getName());
+    selectAddGroup();
+    contactCache = null;
+  }
+
+  public void removeFromGroup(ContactData contact, GroupData group){
+    selectGroup(group.getName());
+    selectContactById(contact.getId());
+    selectRemove();
     contactCache = null;
   }
 
