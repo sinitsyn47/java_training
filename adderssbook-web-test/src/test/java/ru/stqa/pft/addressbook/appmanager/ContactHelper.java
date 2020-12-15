@@ -75,12 +75,14 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.name("add")).click();
   }
 
-  public void toGroup (String groups) {
-      new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(groups);
+  public void toGroup (int groupId) {
+    wd.findElement(By.name("to_group")).click();
+    wd.findElement(By.cssSelector(String.format(".right option[value='%s']",groupId))).click();
   }
 
-  public void selectGroup(String groups){
-      new Select(wd.findElement(By.name("group"))).selectByVisibleText(groups);
+  public void selectGroup(int groupId){
+    wd.findElement(By.name("group")).click();
+    wd.findElement(By.cssSelector(String.format("form [name='group'] option[value='%s']",groupId))).click();
   }
 
   public void selectAllGroup(){
@@ -114,16 +116,16 @@ public class ContactHelper extends HelperBase {
     contactCache = null;
   }
 
-  public void addToGroup(ContactData contact, GroupData group){
-    selectContactById(contact.getId());
-    toGroup(group.getName());
+  public void addToGroup(int contactId, int groupId){
+    selectContactById(contactId);
+    toGroup(groupId);
     selectAddGroup();
     contactCache = null;
   }
 
-  public void removeFromGroup(ContactData contact, GroupData group){
-    selectGroup(group.getName());
-    selectContactById(contact.getId());
+  public void removeFromGroup(int contactId, int groupId){
+    selectGroup(groupId);
+    selectContactById(contactId);
     selectRemove();
     contactCache = null;
   }

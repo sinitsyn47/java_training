@@ -21,42 +21,52 @@ public class ContactRemoveGroupTest extends TestBase {
               .withFirstname("Sergey").withLastname("Sinitsyn").withNickname("sergey")
               .withAddress("Saint-P.").withMobilePhone("+79533469988").withEmail("test@mail.ru"));
     }
-    if (app.db().groups().size() == 0){
+
+    if (app.db().groups().size() == 0) {
       app.goTo().groupPage();
       app.group().create(new GroupData().withName("test1").withHeader("test2").withFooter("test3"));
-    }
-
-    ContactData contact = app.db().contacts().iterator().next();
-    GroupData group = app.db().groups().iterator().next();
-    if (!contact.getGroups().contains(group)){
       app.goTo().toHome();
-      app.contact().addToGroup(contact,group);
-      app.goTo().goToGroupPage();
     }
   }
 
   @Test
-  public void testContactRemoveGroup () {
-    ContactData contact = app.db().contacts().iterator().next();
-    GroupData group = app.db().groups().iterator().next();
+  public void testContactRemoveGroup() {
 
-    Contacts contactBefore = app.db().group(new GroupData().withId(group.getId())).getContacts();
-    Groups groupBefore = app.db().contact(new ContactData().withId(contact.getId())).getGroups();
+    GroupData group = selectGroup();
+    Contacts contactBefore = app.db().group(group.getId()).getContacts();
+
+    ContactData contact = contactBefore.iterator().next();
+    Groups groupBefore = app.db().contact(contact.getId()).getGroups();
 
     app.goTo().toHome();
-    app.contact().removeFromGroup(contact, group);
+    app.contact().removeFromGroup(contact.getId(),group.getId());
     app.goTo().goToGroupPage();
 
-    Groups groupAfter = app.db().contact(new ContactData().withId(contact.getId())).getGroups();
-    Contacts contactAfter = app.db().group(new GroupData().withId(group.getId())).getContacts();
+    Contacts contactAfter = app.db().group(group.getId()).getContacts();
+    Groups groupAfter = app.db().contact(contact.getId()).getGroups();
 
     assertEquals(groupAfter.size(), groupBefore.size() - 1);
-    assertThat(groupAfter, equalTo(groupBefore.without(group)));
+    assertThat(groupAfter, equalTo(groupBefore.without(app.db().group(group.getId()))));
 
-    assertThat(contactAfter.size(), equalTo(contactBefore.size() - 1));
-    assertThat(contactAfter, equalTo(contactBefore.without(contact)));
+    assertEquals(contactAfter.size(), contactBefore.size() - 1);
+    assertThat(contactAfter, equalTo(contactBefore.without(app.db().contact(contact.getId()))));
 
     verifyContactListInUI();
   }
+
+  private GroupData selectGroup() {
+    Groups groups = app.db().groups();
+    for (GroupData group : groups) {
+      if (app.db().group(group.getId()).getContacts().size() > 0) {
+        return group;
+      }
+    }
+    GroupData groupTest = groups.iterator().next();
+    ContactData contacts = app.db().contacts().iterator().next();
+    app.goTo().toHome();
+    app.contact().addToGroup(contacts.getId(), app.db().groups().iterator().next().getId());
+    return groupTest;
+  }
+
 
 }
