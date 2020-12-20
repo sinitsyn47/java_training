@@ -35,7 +35,7 @@ public boolean login (String username, String password) throws IOException {
   post.setEntity(new UrlEncodedFormEntity(params));
   CloseableHttpResponse response = httpclient.execute(post);
   String body = geTextFrom(response);
-  return body.contains(String.format("<span class=\"label hidden-xs label-default arrowed\">%s</span>", username));
+  return body.contains(String.format("<a href=\"/mantisbt-2.24.2/account_page.php\">%s</a>", username));
 }
 
 private String geTextFrom (CloseableHttpResponse response) throws IOException {
