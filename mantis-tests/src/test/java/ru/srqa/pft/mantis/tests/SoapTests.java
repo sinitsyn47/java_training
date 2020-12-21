@@ -1,6 +1,7 @@
 package ru.srqa.pft.mantis.tests;
 
 
+import org.testng.SkipException;
 import org.testng.annotations.Test;
 import ru.srqa.pft.mantis.model.Issue;
 import ru.srqa.pft.mantis.model.Project;
@@ -29,6 +30,18 @@ public class SoapTests extends TestBase{
     Issue issue = new Issue().withSummary("Test issue").withDescription("Test issue description").withProject(projects.iterator().next());
     Issue created =  app.soap().addIssue(issue);
     assertEquals(issue.getSummary(), created.getSummary());
+  }
 
+  @Test
+  public void testIssue()throws RemoteException,  ServiceException, MalformedURLException{
+    int issueId = 1;
+    try {
+      skipIfNotFixed(issueId);
+      if (! isIssueOpen(issueId)) {
+        System.out.println("баг исправлен");
+      } else System.out.println("баг еще не исправлен");
+    } catch (SkipException e) {
+      e.printStackTrace();
+    }
   }
 }
