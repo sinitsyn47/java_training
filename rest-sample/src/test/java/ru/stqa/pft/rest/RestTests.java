@@ -14,7 +14,7 @@ import java.util.Set;
 
 import static org.testng.Assert.assertEquals;
 
-public class RestTests {
+public class RestTests extends TestBase {
 
   @Test
   public void testCreateIssue() throws IOException {
@@ -36,9 +36,6 @@ public class RestTests {
     return new Gson().fromJson(issues, new TypeToken<Set<Issue>>(){}.getType());
   }
 
-  private Executor getExecutor() {
-    return Executor.newInstance().auth("288f44776e7bec4bf44fdfeb1e646490", "");
-  }
 
   private int createIssue(Issue newIssue) throws IOException {
     String json = getExecutor().execute(Request.Post("https://bugify.stqa.ru/api/issues.json")
